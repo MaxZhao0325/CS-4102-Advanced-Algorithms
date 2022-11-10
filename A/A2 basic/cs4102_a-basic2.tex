@@ -1,0 +1,234 @@
+%---------change this for every latex homework
+\def\yourid{hz9xs}   % replace with your UVA computing ID
+\def\collabs{list collaborators' computing IDs}
+\def\sources{Cormen, et al, Introduction to Algorithms.  \emph{(add others here)}}
+% -----------------------------------------------------
+\def\duedate{Friday, February 18, 2022 at 11:30 pm }
+\def\duelocation{via Gradescope}
+\def\htype{Basic}
+\def\hunit{A}
+\def\hnumber{2}
+\def\course{{cs4102 - algorithms - spring 2022}}%------
+%-------------------------------------
+%-------------------------------------
+
+\documentclass[10pt]{article}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[osf]{mathpazo}
+\usepackage{amsmath,amsfonts,graphicx}
+\usepackage{latexsym}
+\usepackage[top=1in,bottom=1.4in,left=1.25in,right=1.25in,centering,letterpaper]{geometry}
+\usepackage{color}
+\definecolor{mdb}{rgb}{0.1,0.6,0.4} 
+\definecolor{cit}{rgb}{0.05,0.2,0.45} 
+\pagestyle{myheadings}
+\markboth{\yourid}{\yourid}
+\usepackage{clrscode}
+
+\newenvironment{proof}{\par\noindent{\it Proof.}\hspace*{1em}}{$\Box$\bigskip}
+\newcommand{\handout}{
+   \renewcommand{\thepage}{Unit \hunit: \htype~Homework \hnumber~-~\arabic{page}}
+   \noindent
+   \begin{center}
+      \vbox{
+    \hbox to \columnwidth {\sc{\course} \hfill}
+    \vspace{-2mm}
+       \hbox to \columnwidth {\sc due \MakeLowercase{\duedate} \duelocation\hfill {\Huge\color{mdb}\hunit\hnumber{\Large\MakeLowercase{\htype}}(\yourid)}}
+      }
+   \end{center}
+   \vspace*{1mm}
+   \hrule
+   \vspace*{1mm}
+    {\footnotesize \textbf{Collaboration Policy:} You are encouraged to collaborate with up to 3 other students, but all work submitted must be your own {\em independently} written solution. List the computing ids of all of your collaborators in the \texttt{collabs} command at the top of the tex file. Do not share written notes, documents (including Google docs, Overleaf docs, discussion notes, PDFs), or code.  Do not seek published or online solutions for any assignments. If you use any published or online resources (which may not include solutions) when completing this assignment, be sure to cite by naming the book etc.\ or listing a website's URL. Do not submit a solution that you are unable to explain orally to a member of the course staff. Any solutions that share similar text/code will be considered in breach of this policy. Please refer to the syllabus for a complete description of the collaboration policy.
+   \vspace*{1mm}
+    \hrule
+    \vspace*{2mm}
+    \noindent
+    \textbf{Collaborators}: hl8zd xs7tng\\
+    \textbf{Sources}: \sources}
+    \vspace*{2mm}
+    \hrule
+    \vskip 2em
+}
+
+%\newcommand{\solution}[1]{\color{blue}\hfill\break\noindent\textbf{Solution:} #1\color{black}}
+%\newcommand{\altsolution}[1]{\color{blue}\hfill\break\noindent\textbf{Solution (Alternative):} #1\color{black}}
+
+\newcommand{\solution}[1]{}
+\newcommand{\altsolution}[1]{}
+
+\newcommand{\bit}[1]{\{0,1\}^{ #1 }}
+%\dontprintsemicolon
+%\linesnumbered
+\newtheorem{problem}{\sc\color{cit}problem}
+\newtheorem{practice}{\sc\color{cit}practice}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\Z}{\mathbb{Z}} % This might be useful for Integers!
+
+\begin{document}
+\thispagestyle{empty}
+\handout
+
+%----Begin your modifications here
+
+
+%--- Problem 1 ------------------------------------------------------------------------------
+\begin{problem} Asymptotics \end{problem}
+
+    \begin{enumerate}   
+    	\item Write a mathematical statement using the appropriate order-class to express ``Algorithm A's worst-case $W(n)$  is quadratic.''
+    	
+    	\textbf{Solution:}  $W(n) = \Theta(n^2)$ 
+    	
+    	\item Write a mathematical statement using the appropriate order-class to express ``Algorithm A's time-complexity $T(n)$ is never worse than cubic for any input.''
+    	
+    	\textbf{Solution:}  $\forall n, T(n) \in O(n^3)$
+     
+        \item Write a statement using words and an appropriate order-class to express ``It's not possible for an algorithm that solves problem P to succeed unless it does at least a cubic number of operations.''
+        
+        \textbf{Solution:}  It's not possible for an algorithm that solves problem P to succeed unless it does $\Omega(n^3)$ operations.
+     
+        \item Prove or disprove the following statement: 
+        $n (\log n)^2 \in O\left(n^{1.5}(\log n)\right)$.
+        
+        \textbf{Solution:}  Direct proof
+        \begin{proof} \\
+        Let $c = 1, n_0 = 1.$ Then, \\ 
+        $n_0 (\log n_0)^2 = (1) (\log (1))^2 = 0,$ \\
+        $c\left(n_0^{1.5}(\log n_0)\right) = c((1)^{1.5}(\log (1))) = 0,$ \\
+        $0\le0.$\\
+        \\
+        $\forall n > 1, \log n < n^{0.5} \implies n (\log n)^2 \le n^{1.5}(\log n)$
+        \end{proof}
+            
+    \end{enumerate}
+
+%--- Problem 2 ------------------------------------------------------------------------------
+\begin{problem} Basic Sorting \end{problem}
+    \begin{enumerate}   
+    	\item In a few sentences, explain if changing the comparison done in mergesort's \emph{merge()} function from $\leq$ to $<$ makes the sorting algorithm incorrect, and also whether it makes the sort unstable.
+    	
+    	\textbf{Solution:}  Changing the comparison will not make the sorting algorithm incorrect, but will make the sort unstable. The consequent of changing the comparison is that if the first element in the first list and the first element in the second list is the same, you will have to pick the element in the second list first, so that the equal elements are not ordered in the same order in the sorted list, and will thus make the sort unstable.
+    	
+    	\item Which of the following are true about insertion sort and mergesort?
+    		\begin{enumerate} 
+    		\item Insertion sort would run reasonably fast when the list is nearly in reverse-sorted order but with a few items out of order.
+    		\item For small inputs we would still expect mergesort to run more quickly that insertion sort.
+    		\item The lower-bounds argument that showed that sorts like insertion sort must be $\Omega(n^2)$ does not apply to mergesort because when a list item
+    		is moved in \emph{merge()} it may un-do more than one inversion.    
+    		\item We say the cost of ``dividing'' in mergesort is 1 because we must do a constant amount of work to find the midpoint of the subproblem we're sorting.
+    		
+    	\textbf{Solution:}  (c) is true. 
+    	
+		\end{enumerate} 
+    	
+    \end{enumerate}       	
+
+%--- Problem 3 ------------------------------------------------------------------------------
+\begin{problem} Recurrence Relations \end{problem}
+      \begin{enumerate}   
+    
+    	\item Reduce the following recurrence to its closed form (i.e.\ remove the recursive part of its defininiton) using the \emph{unrolling method.}
+    	$$T(n) = 3 T(n/3) + n \textrm{ and } T(1) = 1$$
+    	Be sure to show the general form of the recurrence in terms of how many times you've ``un-rolled'', as well as a formula for how many times you ``un-roll'' before getting to the base case.
+    	
+    	\textbf{Solution:}  \\
+    	$i$ is the number of times we have unrolled \\
+    	$T(n) = 3 T(n/3) + n, i = 1$\\
+    	$T(n/3) = 3 T(n/9) + n/3$ \\
+    	$T(n) = 3(3 T(n/9) + n/3)+n = 9T(n/9)+2n, i = 2$ \\
+    	$T(n/9) = 3 T(n/27) + n/9$ \\
+    	$T(n) = 9(3 T(n/27) + n/9)+2n = 27T(n/27)+3n, i = 3$ \\
+    	General Pattern: $T(n) = 3^i T(n/3^i) + in$ \\
+    	Base case: $T(1) = 1$ \\
+    	$n/3^i = 1 \implies i = \log_3 n$ \\
+    	$T(n) = 3^{\log_3 n} T\left(n/3^{\log_3 n}\right) + \left(\log_3 n\right)n$ \\
+    	Closed form: $T(n) = nT(1) + n\log_3 n = n + n \log_3 n$
+    
+    	\item Use the Master Theorem to find the order-class for this recurrence: $T(n) = 3 T (n/2) + n \log n$.  State which case applies, and if no case applies and the Master Theorem cannot be used, state that and explain why.
+    	
+    	\textbf{Solution:}  $T(n) = aT(n/b)+f(n) \\
+    	a = 3, b = 2, f(n) = n\log n$ \\
+    	$f(n) = O\left(n^{\log_b a - \epsilon}\right) \implies case1$ \\
+    	$T(n) = \Theta (n^{\log_b a}) \approx \Theta (n^{1.5})$
+    	
+    	
+
+    	\item Use the Master Theorem to find the order-class for this recurrence: $T(n) = 3 T (n/4) + n \log n$.  State which case applies, and if no case applies and the Master Theorem cannot be used, state that and explain why.
+    	
+    	\textbf{Solution:}  $T(n) = aT(n/b)+f(n) \\
+    	a = 3, b = 4, f(n) = n \log n $ \\
+    	$f(n) = \Omega\left(n^{\log_b a + \epsilon}\right) \implies case3$ \\
+    	$T(n) = \Theta (f(n)) = \Theta (n\log n)$ 
+    	
+    	\item Show you understand how to do a proof using the ``guess and check'' method and induction.   Show that the following recurrence $\in O(n \log_2 n)$:
+    	$$T(n) = 4 T(n/4) + n \textrm{ and } T(1) = 1$$ 
+    	You can assume $n$ is a power of 4.
+    	
+    	\emph{Hints:} For the induction, you have to prove the relationship for a small value of $n$.  You'll find $n=1$ doesn't work, but you can show it holds for the
+    	next larger value of $n$.  (Again, assume $n$ is a power of 4.) It's OK for the induction proof if the relationship holds for some small value of $n$ even
+    	if it doesn't hold for $n=1$.\\
+    	Also, you'll need to guess a value for $c$. For this problem, the value of $c$ is not anything strange or unusual.  A small value will work, you will find it easiest to just keep $c$ in your math calculations and when you get to the final step you can see what value of $c$ makes your relationship true. 
+    	(This problem is much easier than the example we did in class!) 
+    	
+    	\textbf{Solution:}  
+    	\begin{proof} \\
+    	Goal: $T(n) \le n\log_2 n$\\
+    	Base case: $T(4) = 8 \le 8, \; T(16) = 48 \le 64 \;$...up to some small k\\
+    	Hypothesis: $\forall n < x_0, T(n) \le n\log_2 n$ \\
+    	Inductive steps: \\
+    	$T(x_0+1) = 4T(\frac{x_0+1}{4}) + (x_0 + 1) \le 4\left(\frac{x_0+1}{4}\log_2 \frac{x_0+1}{4}\right)+(x_0+1)$ \\
+    	$T(x_0+1) \le (x_0+1)\log_2 \frac{x_0+1}{4} + (x_0 +1)$\\
+    	$T(x_0+1) \le (x_0+1)(\log_2 (x_0+1) - \log_2 4) + (x_0 +1)$\\
+    	$T(x_0+1) \le (x_0+1)(\log_2 (x_0+1) - 2) + (x_0 +1)$\\
+    	$T(x_0+1) \le (x_0+1)(\log_2 (x_0+1)) - (x_0 +1)$\\
+    	$T(x_0+1) \le (x_0+1)(\log_2 (x_0+1))$
+    	\end{proof}
+      \end{enumerate}   
+
+%--- Problem 4 ------------------------------------------------------------------------------
+ \begin{problem} Divide and Conquer \#1\end{problem}
+    
+\noindent
+Write pseudo-code that implements a divide and conquer algorithm for the following problem.  Given a list $L$ of size $n$,  find values of the largest and second largest items in the list.  (Assume that $L$ contains unique values.)
+	
+	In your pseudo-code,  you can indicate that a pair of values is returned by a function using Python-like syntax, if you wish.  For example,  a function $funky()$ that had this return statement:\\
+	\hspace*{3em}{\tt return a, b} \\
+	would could be used to assign $a$ to $x$ and $b$ to $y$ if called this way: \\
+	\hspace*{3em}{\tt (x, y) = funky()}
+	
+	\textbf{Solution:}  \\
+	func(List A, int left, int right)\{\\
+	\hspace*{1cm}if (left == right)\\
+	\hspace*{2cm}return (A[left], 0)\\
+	\hspace*{1cm}if (left == right - 1)\\
+	\hspace*{2cm}return (A[left], A[right])\\
+	\hspace*{1cm}middle = (left + right) / 2 \\
+	\hspace*{1cm}(l1, l2) = func(A, left, middle)\\
+	\hspace*{1cm}(r1, r2) = func(A, middle + 1, right)\\
+	\hspace*{1cm}return two largest values (max1, max2) between (l1, l2, r1, r2)\\
+	\}
+	
+%--- Problem 5 ------------------------------------------------------------------------------
+ \begin{problem} Divide and Conquer \#2\end{problem}
+
+\noindent
+\textbf{Conference Superstar.}  There is a CS conference with $n$ attendees. One attendee is a ``superstar'' --- she is new to the field and has written the top paper at the conference.  She is the attendee whom all other attendees know, yet she knows no other attendee.  Specifically, if attendee $a_i$ is the superstar, then $\forall a_j \neq a_i$, $knows(a_j, a_i) == true$ and $knows(a_i, a_j) == false$.  Other attendees may or may not know each other, as is true for ``normal'' meetings.  Give a $O(n)$ algorithm which determines who the superstar is.
+
+\emph{Hint:} Compare pairs of attendees and try to eliminate one of them. Then you might  want to do a swap for each comparison to make sure all attendees that have a certain property are together in one part of your list so you can recurse on just those.      
+      
+      \textbf{Solution:}    \\
+      We put all attendees in a list and we have two index i and j initially pointing to the first and last element on the list. We compare $a_i$ and $a_j$. If $knows(a_i, a_j) == true$, we can eliminate $a_i$ by swapping $a_i$ with $a_j$; if $knows(a_i, a_j) == false$, we can eliminate $a_j$ by keeping $a_j$ at its position. After either cases, index $i=i + 1$ and $j = j - 1$. We keeping comparing pairs until $i = j$. After we separate two groups (the left part could be superstar while the right part couldn't), we are going to do recursion. We set index $i = 0$, and do the same thing to the new list from i to j, until there is only one element left in the list, who is the superstar.
+
+\begin{problem} Gradescope Submission \end{problem}
+Submit a version of this \verb|.tex| file to Gradescope with your solutions added.  You should only submit your \verb|.pdf| and \verb|.tex| files.
+
+% Bibliography
+%\bibliographystyle{plain}
+%\bibliography{bibliography}
+
+\end{document}
+
